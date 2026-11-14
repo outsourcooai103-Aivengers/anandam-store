@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EADBCE]">
+    <header className="relative z-40 bg-[#FDFBF7] border-b border-[#EADBCE]">
       {/* Top Heritage Notice Bar */}
       <div className="bg-[#54151C] text-[#F4E5BD] text-[10.5px] sm:text-xs py-1.5 sm:py-2 px-3 sm:px-4 text-center tracking-normal sm:tracking-wider flex items-center justify-center gap-1.5 sm:gap-2">
         <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D4AF37] animate-pulse flex-shrink-0" />

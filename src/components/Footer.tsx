@@ -67,6 +67,35 @@ export function Footer() {
           <p className="text-xs text-[#EADBCE]/80 leading-relaxed">
             Where Affordability Meets Premiumness. Based in Raipur C.G India, Anandam is a trusted destination for curated suits, sarees, lehengas, and Indo-Western wear with boutique quality, transparent service, and reliable doorstep delivery.
           </p>
+
+          {/* Social Follow */}
+          <div className="pt-2">
+            <h5 className="font-serif-luxury text-xs font-semibold text-[#D4AF37] uppercase tracking-wider mb-2">
+              Follow Us
+            </h5>
+            <a
+              href="https://www.instagram.com/anandam_raipur/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#722F37]/60 border border-[#D4AF37]/40 text-[#F4E5BD] hover:text-white hover:bg-[#833AB4] hover:border-white transition-all shadow-sm group"
+              aria-label="Follow Anandam Raipur on Instagram"
+            >
+              <svg
+                className="w-4 h-4 text-[#F4E5BD] group-hover:text-white group-hover:scale-110 transition-transform"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              <span className="text-xs font-medium tracking-wide">@anandam_raipur</span>
+            </a>
+          </div>
         </div>
 
         {/* Collections */}
@@ -120,11 +149,11 @@ export function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
-              <span>Email: [Email Placeholder]</span>
+              <span>Email: sarees.anandam01@gmail.com</span>
             </li>
             <li className="flex items-center gap-2 pt-1 border-t border-[#D4AF37]/20">
               <span className="text-[#D4AF37] font-medium">GST Number:</span>
-              <span>[GST Number Placeholder]</span>
+              <span>22IGOPD3173H1ZE</span>
             </li>
           </ul>
         </div>
