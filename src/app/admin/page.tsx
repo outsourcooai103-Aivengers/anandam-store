@@ -116,11 +116,10 @@ export default function AdminDashboardPage() {
 
       const auth =
         typeof window !== "undefined" &&
-        (localStorage.getItem("anandam_admin_auth") === "true" ||
-          localStorage.getItem("virasat_admin_auth") === "true");
+        localStorage.getItem("anandam_admin_auth") === "true";
       const user =
         typeof window !== "undefined" &&
-        (localStorage.getItem("anandam_admin_user") || localStorage.getItem("virasat_admin_user"));
+        localStorage.getItem("anandam_admin_user");
 
       if (!auth) {
         router.push("/admin/login");
@@ -152,8 +151,6 @@ export default function AdminDashboardPage() {
     }
     localStorage.removeItem("anandam_admin_auth");
     localStorage.removeItem("anandam_admin_user");
-    localStorage.removeItem("virasat_admin_auth");
-    localStorage.removeItem("virasat_admin_user");
     router.push("/admin/login");
   };
 
@@ -348,7 +345,7 @@ export default function AdminDashboardPage() {
           if (photo.file) {
             const res = await uploadSareeImage(photo.file);
             if (res.error || !res.url) {
-              throw new Error(res.error || `Failed to upload Photo #${idx + 1}.`);
+              throw new Error("Unable to upload image right now. Please check your connection and try again.");
             }
             return res.url;
           }

@@ -33,6 +33,7 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
+  const [customerPincode, setCustomerPincode] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [manualCity, setManualCity] = useState("");
@@ -44,6 +45,7 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
     name?: string;
     phone?: string;
     address?: string;
+    pincode?: string;
     state?: string;
     city?: string;
     size?: string;
@@ -101,22 +103,32 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
       name?: string;
       phone?: string;
       address?: string;
+      pincode?: string;
       state?: string;
       city?: string;
       size?: string;
     } = {};
 
-    if (!customerName.trim()) {
-      errors.name = "Please enter your full name";
+    const cleanName = customerName.trim();
+    if (!cleanName) {
+      errors.name = "Please enter your name";
+    } else if (!/^[A-Za-z\s]+$/.test(cleanName)) {
+      errors.name = "Name must contain letters only";
     }
 
     const cleanPhone = customerPhone.replace(/\D/g, "");
-    if (!cleanPhone || cleanPhone.length < 10) {
-      errors.phone = "Please enter a valid 10-digit mobile / WhatsApp number";
+    if (!cleanPhone || cleanPhone.length !== 10) {
+      errors.phone = "Enter a valid 10-digit mobile number";
     }
 
-    if (!customerAddress.trim()) {
-      errors.address = "Please enter your delivery / billing address";
+    const cleanAddress = customerAddress.trim();
+    if (!cleanAddress) {
+      errors.address = "Please enter your delivery address";
+    }
+
+    const cleanPincode = customerPincode.replace(/\D/g, "");
+    if (!cleanPincode || cleanPincode.length !== 6) {
+      errors.pincode = "Enter a valid 6-digit PIN code";
     }
 
     if (!selectedState) {
@@ -185,6 +197,7 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
     message += `- *Name:* ${customerName.trim()}\n`;
     message += `- *Phone / WhatsApp:* ${customerPhone.trim()}\n`;
     message += `- *City & State:* ${finalCity}, ${selectedState}\n`;
+    message += `- *PIN Code:* ${customerPincode.trim()}\n`;
     message += `- *Delivery Address:* ${customerAddress.trim()}\n`;
 
     if (notes.trim()) {
@@ -205,7 +218,8 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
       customerName: customerName.trim(),
       customerPhone: customerPhone.trim(),
       customerAddress: customerAddress.trim(),
-      customerCity: finalCity,
+      customerPincode: customerPincode.trim(),
+      customerCity: `${finalCity}, ${selectedState} - ${customerPincode.trim()}`,
       customerState: selectedState,
       selectedSize: saree.type !== "Saree" ? selectedSize : undefined,
       preferredBudget: saree.type === "Lehenga" && preferredBudget ? preferredBudget : undefined,
@@ -232,6 +246,7 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
         city: finalCity,
         state: selectedState,
         address: customerAddress.trim(),
+        pincode: customerPincode.trim(),
         budget: saree.type === "Lehenga" ? preferredBudget : "",
         notes: notes.trim(),
       });
@@ -341,6 +356,7 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
               </label>
               <input
                 type="text"
+                maxLength={50}
                 value={customerName}
                 onChange={(e) => {
                   setCustomerName(e.target.value);
@@ -363,9 +379,11 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
               </label>
               <input
                 type="tel"
+                maxLength={10}
                 value={customerPhone}
                 onChange={(e) => {
-                  setCustomerPhone(e.target.value);
+                  const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                  setCustomerPhone(val);
                   if (fieldErrors.phone) setFieldErrors({ ...fieldErrors, phone: undefined });
                 }}
                 placeholder="e.g. 9876543210"
@@ -459,6 +477,7 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
               </label>
               <textarea
                 rows={2}
+                maxLength={250}
                 value={customerAddress}
                 onChange={(e) => {
                   setCustomerAddress(e.target.value);
@@ -471,6 +490,31 @@ export function InquiryModal({ saree, initialQuantity = 1, isOpen, onClose }: In
               />
               {fieldErrors.address && (
                 <p className="text-[11px] text-red-600 mt-1">{fieldErrors.address}</p>
+              )}
+            </div>
+
+            {/* PIN Code */}
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                PIN Code <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                value={customerPincode}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, "").slice(0, 6);
+                  setCustomerPincode(val);
+                  if (fieldErrors.pincode) setFieldErrors({ ...fieldErrors, pincode: undefined });
+                }}
+                placeholder="e.g. 452001"
+                className={`w-full px-3.5 py-2 text-xs sm:text-sm bg-white rounded-xl border ${
+                  fieldErrors.pincode ? "border-red-400 focus:ring-red-400" : "border-[#EADBCE] focus:border-[#722F37]"
+                } focus:outline-none focus:ring-1 focus:ring-[#722F37]`}
+              />
+              {fieldErrors.pincode && (
+                <p className="text-[11px] text-red-600 mt-1">{fieldErrors.pincode}</p>
               )}
             </div>
 

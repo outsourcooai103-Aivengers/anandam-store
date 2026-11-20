@@ -43,6 +43,7 @@ export interface Inquiry {
   customerName: string;
   customerPhone: string;
   customerAddress?: string;
+  customerPincode?: string;
   customerCity?: string;
   customerState?: string;
   selectedSize?: string;

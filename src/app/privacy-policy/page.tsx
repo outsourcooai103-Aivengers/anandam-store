@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ShieldCheck, Lock, FileSpreadsheet, MessageCircle, UserCheck, AlertCircle, ArrowLeft, Mail, Phone, MapPin } from "lucide-react";
@@ -19,15 +18,6 @@ export default function PrivacyPolicyPage() {
       {/* Hero Banner */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#54151C] to-[#722F37] text-[#FDFBF7] py-12 sm:py-16 px-4 border-b border-[#D4AF37]/40 shadow-inner">
         <div className="max-w-4xl mx-auto text-center relative z-10 space-y-3">
-          <div className="relative w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-1">
-            <Image
-              src="/logo.png"
-              alt="Anandam Sarees Emblem"
-              fill
-              className="object-contain drop-shadow"
-            />
-          </div>
-
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-[#D4AF37]/20 text-[#F4E5BD] border border-[#D4AF37]/40">
             <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
             <span>Digital Personal Data Protection Act, 2023 (India) Compliance</span>

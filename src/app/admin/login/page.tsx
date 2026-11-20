@@ -26,8 +26,7 @@ export default function AdminLoginPage() {
       }
       const localAuth =
         typeof window !== "undefined" &&
-        (localStorage.getItem("anandam_admin_auth") === "true" ||
-          localStorage.getItem("virasat_admin_auth") === "true");
+        localStorage.getItem("anandam_admin_auth") === "true";
       if (localAuth) {
         router.push("/admin");
       }
@@ -88,13 +87,7 @@ export default function AdminLoginPage() {
         }
       }
 
-      // Demo fallback if testing offline
-      if (password.length >= 6) {
-        localStorage.setItem("anandam_admin_auth", "true");
-        localStorage.setItem("anandam_admin_user", email || "admin@anandamsarees.in");
-        router.push("/admin");
-        return;
-      }
+      setErrorMessage("Authentication failed. Please verify credentials and try again.");
     } catch {
       setErrorMessage("An unexpected authentication error occurred. Please try again.");
     } finally {

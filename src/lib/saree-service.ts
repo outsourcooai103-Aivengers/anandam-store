@@ -312,27 +312,13 @@ export async function createSaree(
         return { data: created, error: null };
       }
 
-      // If Supabase insert failed, save to local storage mirror so product is immediately available
-      console.warn("Supabase insert notice, saving to local mirror:", error);
-      const current = getLocalSarees();
-      saveLocalSarees([newSaree, ...current]);
-      return { data: newSaree, error: null };
+      return { data: null, error: "Unable to save product right now. Please check your internet connection and try again." };
     }
 
-    const current = getLocalSarees();
-    saveLocalSarees([newSaree, ...current]);
-    return { data: newSaree, error: null };
+    return { data: null, error: "Unable to connect to the store database. Please try again." };
   } catch (err: any) {
     console.error("createSaree caught exception:", err);
-    const local = getLocalSarees();
-    const fallbackSaree: Saree = {
-      ...sareeInput,
-      id: `saree-${Date.now()}`,
-      slug: sareeInput.slug || `saree-${Date.now()}`,
-      createdAt: new Date().toISOString(),
-    };
-    saveLocalSarees([fallbackSaree, ...local]);
-    return { data: fallbackSaree, error: null };
+    return { data: null, error: "Unable to save product right now. Please try again." };
   }
 }
 
@@ -547,13 +533,13 @@ export async function uploadSareeImage(
 
     return {
       url: null,
-      error: "Failed to process photo. Please try again.",
+      error: "Unable to upload image right now. Please check your connection and try again.",
     };
   } catch (err: any) {
     console.error("uploadSareeImage error:", err);
     return {
       url: null,
-      error: err.message || "Unable to compress and upload photo.",
+      error: "Unable to upload image right now. Please check your connection and try again.",
     };
   }
 }
