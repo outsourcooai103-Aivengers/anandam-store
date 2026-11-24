@@ -159,13 +159,34 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Copyright Bar with DPDP Privacy Policy Link */}
-      <div className="border-t border-[#D4AF37]/20 py-4 px-4 text-center text-[11px] text-[#EADBCE]/60 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
-        <span>© {new Date().getFullYear()} Anandam Sarees. All designs and images protected.</span>
-        <span className="hidden sm:inline text-stone-500">•</span>
-        <Link href="/privacy-policy" className="text-[#EADBCE]/80 hover:text-white underline transition-colors">
-          DPDP Privacy Policy
-        </Link>
+      {/* Copyright Bar with Outsourco Attribution and DPDP Privacy Policy Link */}
+      <div className="border-t border-[#D4AF37]/25 py-4 px-4 sm:px-6 lg:px-8 text-xs text-[#EADBCE]/70 bg-[#1A0C0E]">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+          {/* Bottom Left: Bold Outsourco Badge */}
+          <div className="order-2 sm:order-1">
+            <a
+              href="https://outsourco.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#722F37]/80 to-[#54151C] border border-[#D4AF37] text-white shadow-sm hover:shadow-md hover:border-[#F4E5BD] hover:scale-[1.02] active:scale-[0.98] transition-all group"
+            >
+              <span className="text-[11px] text-[#EADBCE] font-normal">A product by</span>
+              <span className="font-bold text-xs uppercase tracking-wider text-[#F4E5BD] group-hover:text-white flex items-center gap-1">
+                outsourco
+                <span className="text-[#D4AF37] font-bold group-hover:translate-x-0.5 transition-transform">↗</span>
+              </span>
+            </a>
+          </div>
+
+          {/* Bottom Center/Right: Copyright & DPDP */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 order-1 sm:order-2 text-[11px] text-[#EADBCE]/60">
+            <span>© {new Date().getFullYear()} Anandam Sarees. All designs and images protected.</span>
+            <span className="hidden sm:inline text-stone-500">•</span>
+            <Link href="/privacy-policy" className="text-[#EADBCE]/80 hover:text-white underline transition-colors">
+              DPDP Privacy Policy
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   );
